@@ -15,7 +15,7 @@ import * as serviceWorker from "./serviceWorker";
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 ReactDOM.render(
-    <Provider store={store}>
+    <Provider store={ store }>
         <App />
     </Provider>,
     document.getElementById("root")

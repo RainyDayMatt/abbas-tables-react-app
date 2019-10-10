@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { Link } from "react-router-dom";
+
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Navbar from "react-bootstrap/Navbar";
@@ -57,15 +59,18 @@ class AuthNavbar extends Component {
         if (!this.props.user) {
             userOptions =
                 <Form inline onSubmit={ (e) => this.handleUserSignInFormSubmit(e) } >
-                    <Form.Group className={ "mr-sm-2" } controlId={ "email" } >
+                    <Form.Group className={ "mr-2" } controlId={ "email" } >
                         <Form.Control onChange={ (e) => this.handleSubmissionEmailChange(e) } placeholder={ "Email" } type={ "email" } value={ this.state.submissionEmail } />
                     </Form.Group>
-                    <Form.Group className={ "mr-sm-2" } controlId={ "password" } >
+                    <Form.Group className={ "mr-2" } controlId={ "password" } >
                         <Form.Control onChange={ (e) => this.handleSubmissionPasswordChange(e) } placeholder={ "Password" } type={ "password" } value={ this.state.submissionPassword } />
                     </Form.Group>
-                    <Button type={ "submit" } variant={ "primary" } >
+                    <Button className={ "mr-2" } type={ "submit" } variant={ "primary" } >
                         Sign In
                     </Button>
+                    <Link to={ "/signUp" }>
+                        Sign Up
+                    </Link>
                 </Form>;
         } else {
             userOptions =
