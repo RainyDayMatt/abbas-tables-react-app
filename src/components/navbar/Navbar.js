@@ -31,7 +31,7 @@ class AuthNavbar extends Component {
     handleUserSignInFormSubmit(e) {
         e.preventDefault();
         if (this.state.submissionEmail !== "" && this.state.submissionPassword !== "") {
-            this.props.fetchUser({
+            console.log("test");this.props.fetchUser({
                 email: this.state.submissionEmail,
                 password: this.state.submissionPassword
             });
@@ -41,7 +41,7 @@ class AuthNavbar extends Component {
                 submissionPassword: "",
                 submissionPasswordError: ""
             });
-        } else {
+        } else {console.log("err");
             this.setState({
                 submissionEmailError: this.state.submissionEmail === "" ? "Email cannot be blank." : "",
                 submissionPasswordError: this.state.submissionPassword === "" ? "Password cannot be blank." : ""
@@ -58,23 +58,20 @@ class AuthNavbar extends Component {
         let userOptions;
         if (!this.props.user) {
             userOptions =
-                <Form inline onSubmit={ (e) => this.handleUserSignInFormSubmit(e) } >
-                    <Form.Group className={ "mr-2" } controlId={ "email" } >
+                <Form className={ "userSignInForm" } inline onSubmit={ (e) => this.handleUserSignInFormSubmit(e) } >
+                    <Form.Group className={ `mr-2 userSignInEmail` } controlId={ "email" } >
                         <Form.Control onChange={ (e) => this.handleSubmissionEmailChange(e) } placeholder={ "Email" } type={ "email" } value={ this.state.submissionEmail } />
                     </Form.Group>
-                    <Form.Group className={ "mr-2" } controlId={ "password" } >
+                    <Form.Group className={ `mr-2 userSignInPassword` } controlId={ "password" } >
                         <Form.Control onChange={ (e) => this.handleSubmissionPasswordChange(e) } placeholder={ "Password" } type={ "password" } value={ this.state.submissionPassword } />
                     </Form.Group>
                     <Button className={ "mr-2" } type={ "submit" } variant={ "primary" } >
                         Sign In
                     </Button>
-                    <Link to={ "/signUp" }>
-                        Sign Up
-                    </Link>
                 </Form>;
         } else {
             userOptions =
-                <Form inline onSubmit={ (e) => this.handleUserSignOutFormSubmit(e) } >
+                <Form className={ "userSignOutForm" } inline onSubmit={ (e) => this.handleUserSignOutFormSubmit(e) } >
                     <div className={ "mr-3" }>Hi, { this.props.user.firstName }!</div>
                     <Button type={ "submit" } variant={ "primary" } >
                         Sign Out
