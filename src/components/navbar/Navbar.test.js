@@ -38,6 +38,7 @@ const formSubmitEvent = {
 };
 
 describe("Navbar component : ", () => {
+
     describe("User sign-in behavior.", () => {
         it("Should not call fetchUser when sign in form is submitted if email alone is an empty string.", () => {
             const { props, enzymeWrapper, inputs } = signedOutSetup();
@@ -61,6 +62,7 @@ describe("Navbar component : ", () => {
             expect(props.fetchUser.mock.calls.length).toBe(1);
         });
     });
+
     describe("User sign-out behavior.", () => {
         it("Should call submitUserSignOutForm when sign out form is submitted.", () => {
             const { props, enzymeWrapper } = signedInSetup();

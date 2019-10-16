@@ -35,7 +35,7 @@ describe("Navbar actions : ", () => {
             };
             fetchMock.postOnce(userSignInURL, {
                 headers: { "content-type": "application/json" },
-                body: user
+                user
             });
             const expectedActions = [
                 {

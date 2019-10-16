@@ -51,7 +51,7 @@ export function fetchUser(userSignInForm, forcedTime = undefined) {
                 if (json.err) {
                     dispatch(fetchUserFailure(json.err, forcedTime))
                 } else {
-                    dispatch(fetchUserSuccess(json, forcedTime))
+                    dispatch(fetchUserSuccess(json.user, forcedTime))
                 }
             });
     }

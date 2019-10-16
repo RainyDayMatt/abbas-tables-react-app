@@ -30,8 +30,8 @@ class AuthNavbar extends Component {
 
     handleUserSignInFormSubmit(e) {
         e.preventDefault();
-        if (this.state.submissionEmail !== "" && this.state.submissionPassword !== "") {
-            console.log("test");this.props.fetchUser({
+        if (this.state.submissionEmail.length > 0 && this.state.submissionPassword.length > 0) {
+            this.props.fetchUser({
                 email: this.state.submissionEmail,
                 password: this.state.submissionPassword
             });
@@ -41,10 +41,10 @@ class AuthNavbar extends Component {
                 submissionPassword: "",
                 submissionPasswordError: ""
             });
-        } else {console.log("err");
+        } else {
             this.setState({
-                submissionEmailError: this.state.submissionEmail === "" ? "Email cannot be blank." : "",
-                submissionPasswordError: this.state.submissionPassword === "" ? "Password cannot be blank." : ""
+                submissionEmailError: this.state.submissionEmail.length > 0 ? "Email cannot be blank." : "",
+                submissionPasswordError: this.state.submissionPassword.length > 0 ? "Password cannot be blank." : ""
             });
         }
     }
