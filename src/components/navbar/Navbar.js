@@ -68,6 +68,9 @@ class AuthNavbar extends Component {
                     <Button className={ "mr-2" } type={ "submit" } variant={ "primary" } >
                         Sign In
                     </Button>
+                    <Link to={ "/signUp" }>
+                        Sign Up
+                    </Link>
                 </Form>;
         } else {
             userOptions =
