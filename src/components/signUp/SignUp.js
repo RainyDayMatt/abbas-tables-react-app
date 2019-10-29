@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Form from "../../../node_modules/react-bootstrap/Form";
 import Button from "../../../node_modules/react-bootstrap/Button";
-import {Link} from "react-router-dom";
 
 class SignUp extends Component {
     constructor(props) {

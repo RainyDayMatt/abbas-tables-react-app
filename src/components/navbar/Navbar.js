@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import { Link } from "react-router-dom";
 
 import Button from "react-bootstrap/Button";
@@ -31,7 +30,7 @@ class AuthNavbar extends Component {
     handleUserSignInFormSubmit(e) {
         e.preventDefault();
         if (this.state.submissionEmail.length > 0 && this.state.submissionPassword.length > 0) {
-            this.props.fetchUser({
+            this.props.authentication.fetchUser({
                 email: this.state.submissionEmail,
                 password: this.state.submissionPassword
             });
@@ -51,21 +50,21 @@ class AuthNavbar extends Component {
 
     handleUserSignOutFormSubmit(e) {
         e.preventDefault();
-        this.props.submitUserSignOutForm();
+        this.props.authentication.submitUserSignOutForm();
     }
 
     render() {
         let userOptions;
-        if (!this.props.user) {
+        if (!this.props.authentication.user) {
             userOptions =
-                <Form className={ "userSignInForm" } inline onSubmit={ (e) => this.handleUserSignInFormSubmit(e) } >
+                <Form className={ "userSignInForm" } inline onSubmit={ (e) => this.handleUserSignInFormSubmit(e) }>
                     <Form.Group>
                         <Form.Control className={ `mr-2 userSignInEmail` } onChange={ (e) => this.handleSubmissionEmailChange(e) } placeholder={ "Email" } type={ "email" } value={ this.state.submissionEmail } />
                     </Form.Group>
-                    <Form.Group controlId={ "password" } >
+                    <Form.Group>
                         <Form.Control className={ `mr-2 userSignInPassword` } onChange={ (e) => this.handleSubmissionPasswordChange(e) } placeholder={ "Password" } type={ "password" } value={ this.state.submissionPassword } />
                     </Form.Group>
-                    <Button className={ "mr-2" } type={ "submit" } variant={ "primary" } >
+                    <Button className={ "mr-2" } type={ "submit" } variant={ "primary" }>
                         Sign In
                     </Button>
                     <Link to={ "/signUp" }>
@@ -74,35 +73,35 @@ class AuthNavbar extends Component {
                 </Form>;
         } else {
             userOptions =
-                <Form className={ "userSignOutForm" } inline onSubmit={ (e) => this.handleUserSignOutFormSubmit(e) } >
-                    <div className={ "mr-3" }>Hi, { this.props.user.firstName }!</div>
-                    <Button type={ "submit" } variant={ "primary" } >
+                <Form className={ "userSignOutForm" } inline onSubmit={ (e) => this.handleUserSignOutFormSubmit(e) }>
+                    <div className={ "mr-2" }>Hi, { this.props.authentication.user.firstName }!</div>
+                    <Button type={ "submit" } variant={ "primary" }>
                         Sign Out
                     </Button>
                 </Form>;
         }
         return (
-            <Navbar className={ "p-3" } expand={ "lg" } style={{ flex: 1, flexDirection: "row", justifyContent: "space-between" }} >
+            <Navbar expand={ "lg" } style={{ flex: 1, flexDirection: "row", justifyContent: "space-between" }}>
                 <Navbar.Brand>Abba's Tables</Navbar.Brand>
                 <Navbar.Toggle aria-controls={ "basic-navbar-nav" } />
                 <Navbar.Collapse id={ "basic-navbar-nav" }>
                     <Nav>
-                        <NavDropdown className={ "ml-3" } title={ "About Us" }>
+                        <NavDropdown title={ "About Us" }>
                             <NavDropdown.Item>Mission Statement</NavDropdown.Item>
                             <NavDropdown.Item>Meet The Staff</NavDropdown.Item>
                             <NavDropdown.Item>Media</NavDropdown.Item>
                         </NavDropdown>
-                        <NavDropdown className={ "ml-3" } title={ "News" }>
+                        <NavDropdown title={ "News" }>
                             <NavDropdown.Item>General News</NavDropdown.Item>
                             <NavDropdown.Item>Alerts and Notices</NavDropdown.Item>
                         </NavDropdown>
-                        <NavDropdown className={ "ml-3" } title={ "Donate" }>
+                        <NavDropdown title={ "Donate" }>
                             <NavDropdown.Item>Money</NavDropdown.Item>
                             <NavDropdown.Item>Food Donation Guidelines</NavDropdown.Item>
                             <NavDropdown.Item>Volunteer</NavDropdown.Item>
                             <NavDropdown.Item>Other</NavDropdown.Item>
                         </NavDropdown>
-                        <NavDropdown className={ "ml-3" } title={ "Contact Us" }>
+                        <NavDropdown title={ "Contact Us" }>
                             <NavDropdown.Item>Message Us</NavDropdown.Item>
                             <NavDropdown.Item>Follow Us</NavDropdown.Item>
                             <NavDropdown.Item>Other Contact Info</NavDropdown.Item>
