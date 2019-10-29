@@ -2,14 +2,21 @@ import * as signUpActions from "../../actions/signUp/SignUpActions";
 import * as signUpReducers from "./SignUpReducers";
 
 describe("Signup reducers : ", () => {
-    const newUserCreationForm = {
-        email: "shepard@n7.gov",
-        password: "M1nerals21",
-        firstName: "John",
-        lastName: "Shepard"
-    };
 
     describe("Signup reducer : ", () => {
+        const newUserCreationForm = {
+            email: "shepard@n7.gov",
+            password: "M1nerals21",
+            confirmationPassword: "M1nerals21",
+            firstName: "John",
+            lastName: "Shepard"
+        };
+        const newUser = {
+            id: 1,
+            email: "shepard@n7.gov",
+            password: "M1nerals21"
+        };
+        const err = "My favorite error on the Citadel.";
         const signUpInitialState = {
             isCreating: false,
             newUser: null,
@@ -21,20 +28,6 @@ describe("Signup reducers : ", () => {
             newUser: null,
             err: null,
             receivedAt: null
-        };
-        const newUser = {
-            id: 1,
-            email: "shepard@n7.gov",
-            password: "M1nerals21",
-            firstName: "John",
-            lastName: "Shepard"
-        };
-        const err = "My favorite error on the Citadel.";
-        const createUserSuccessState = {
-            isCreating: false,
-            newUser,
-            err: null,
-            receivedAt: 1
         };
         it("Should return the initial state.", () => {
             expect(signUpReducers.signUp(undefined, {})).toEqual(signUpInitialState);
@@ -50,7 +43,12 @@ describe("Signup reducers : ", () => {
                 type: signUpActions.CREATE_USER_SUCCESS,
                 newUser,
                 receivedAt: 1
-            })).toEqual(createUserSuccessState);
+            })).toEqual({
+                isCreating: false,
+                newUser,
+                err: null,
+                receivedAt: 1
+            });
         });
         it("Should handle CREATE_USER_FAILURE.", () => {
             expect(signUpReducers.signUp(createUserRequestState, {

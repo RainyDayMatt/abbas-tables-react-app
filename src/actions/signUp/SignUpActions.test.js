@@ -8,15 +8,16 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe("Signup actions : ", () => {
-    const userCreationForm = {
-        email: "shepard@n7.gov",
-        password: "M1nerals21",
-        firstName: "John",
-        lastName: "Shepard"
-    };
 
     describe("Asynchronous actions : ", () => {
         const userCreationURL = "http://localhost:3000/users";
+        const userCreationForm = {
+            email: "shepard@n7.gov",
+            password: "M1nerals21",
+            confirmationPassword: "M1nerals21",
+            firstName: "John",
+            lastName: "Shepard"
+        };
         afterEach(() => {
             fetchMock.restore();
         });
@@ -49,8 +50,8 @@ describe("Signup actions : ", () => {
                     expect(store.getActions()).toEqual(expectedActions);
                 });
         });
-        it("Should create a FETCH_USER_FAILURE action when user fetch completes unsuccessfully.", () => {
-            const err = "Incorrect password.";
+        it("Should create a CREATE_USER_FAILURE action when user creation completes unsuccessfully.", () => {
+            const err = "Duplicate email.";
             fetchMock.postOnce(userCreationURL, {
                 headers: { "content-type": "application/json" },
                 err

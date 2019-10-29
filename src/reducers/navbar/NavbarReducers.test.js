@@ -2,12 +2,18 @@ import * as navbarActions from "../../actions/navbar/NavbarActions";
 import * as navbarReducers from "./NavbarReducers";
 
 describe("Navbar reducers : ", () => {
-    const userSignInForm = {
-        email: "shepard@n7.gov",
-        password: "M1nerals21"
-    };
 
     describe("Authentication reducer : ", () => {
+        const userSignInForm = {
+            email: "shepard@n7.gov",
+            password: "M1nerals21"
+        };
+        const user = {
+            id: 1,
+            email: "shepard@n7.gov",
+            password: "M1nerals21"
+        };
+        const err = "My favorite error on the Citadel.";
         const authenticationInitialState = {
             isFetching: false,
             user: null,
@@ -20,12 +26,6 @@ describe("Navbar reducers : ", () => {
             err: null,
             receivedAt: null
         };
-        const user = {
-            id: 1,
-            email: "shepard@n7.gov",
-            password: "M1nerals21"
-        };
-        const err = "My favorite error on the Citadel.";
         const fetchUserSuccessState = {
             isFetching: false,
             user,

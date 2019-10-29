@@ -59,11 +59,11 @@ class AuthNavbar extends Component {
         if (!this.props.user) {
             userOptions =
                 <Form className={ "userSignInForm" } inline onSubmit={ (e) => this.handleUserSignInFormSubmit(e) } >
-                    <Form.Group className={ `mr-2 userSignInEmail` } controlId={ "email" } >
-                        <Form.Control onChange={ (e) => this.handleSubmissionEmailChange(e) } placeholder={ "Email" } type={ "email" } value={ this.state.submissionEmail } />
+                    <Form.Group>
+                        <Form.Control className={ `mr-2 userSignInEmail` } onChange={ (e) => this.handleSubmissionEmailChange(e) } placeholder={ "Email" } type={ "email" } value={ this.state.submissionEmail } />
                     </Form.Group>
-                    <Form.Group className={ `mr-2 userSignInPassword` } controlId={ "password" } >
-                        <Form.Control onChange={ (e) => this.handleSubmissionPasswordChange(e) } placeholder={ "Password" } type={ "password" } value={ this.state.submissionPassword } />
+                    <Form.Group controlId={ "password" } >
+                        <Form.Control className={ `mr-2 userSignInPassword` } onChange={ (e) => this.handleSubmissionPasswordChange(e) } placeholder={ "Password" } type={ "password" } value={ this.state.submissionPassword } />
                     </Form.Group>
                     <Button className={ "mr-2" } type={ "submit" } variant={ "primary" } >
                         Sign In

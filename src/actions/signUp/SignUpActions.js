@@ -26,7 +26,7 @@ function createUserFailure(err, receivedAt = Date.now()) {
 }
 
 export function createUser(userCreationForm, forcedTime = undefined) {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(createUserRequest(userCreationForm));
         let apiRoot = "http://localhost:3000";
         if (process.env.REACT_APP_API_ROOT) {
@@ -35,7 +35,7 @@ export function createUser(userCreationForm, forcedTime = undefined) {
         return fetch(`${apiRoot}/users`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "content-type": "application/json"
             },
             body: JSON.stringify(userCreationForm)
         })

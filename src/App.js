@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 
 import "./App.css";
 import NavbarContainer from "./containers/navbar/NavbarContainer";
+import SignUp from "./components/signUp/SignUp";
 
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
@@ -19,7 +20,7 @@ class App extends Component {
                     <div className={ `px-5 py-3` }>
                         <NavbarContainer/>
                         <main>
-                            <Route path={ "/signUp" }>Lorem Ipsum</Route>
+                            <Route path={ "/signUp" } component={SignUp}/>
                         </main>
                     </div>
                 </BrowserRouter>
