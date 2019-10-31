@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Form from "../../../node_modules/react-bootstrap/Form";
-import Button from "../../../node_modules/react-bootstrap/Button";
 
 class SignUp extends Component {
     constructor(props) {
@@ -29,7 +27,7 @@ class SignUp extends Component {
     }
 
     handleSubmissionConfirmationPasswordChange(e) {
-        this.setState({ submissionPassword: e.target.value });
+        this.setState({ submissionConfirmationPassword: e.target.value });
     }
 
     handleSubmissionFirstNameChange(e) {
@@ -42,17 +40,7 @@ class SignUp extends Component {
 
     render() {
         return (
-            <Form className={ "userSignUpForm" }>
-                <Form.Group controlId={ "email" } >
-                    <Form.Control onChange={ (e) => this.handleSubmissionEmailChange(e) } placeholder={ "Email" } type={ "email" } value={ this.state.submissionEmail } />
-                </Form.Group>
-                <Form.Group controlId={ "password" } >
-                    <Form.Control onChange={ (e) => this.handleSubmissionPasswordChange(e) } placeholder={ "Password" } type={ "password" } value={ this.state.submissionPassword } />
-                </Form.Group>
-                <Button type={ "submit" } variant={ "primary" } >
-                    Sign In
-                </Button>
-            </Form>
+            <div>Sign Up</div>
         );
     }
 }

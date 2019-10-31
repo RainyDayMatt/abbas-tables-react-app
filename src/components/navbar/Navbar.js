@@ -57,7 +57,7 @@ class AuthNavbar extends Component {
         let userOptions;
         if (!this.props.user) {
             userOptions =
-                <Form className={ "userSignInForm" } inline onSubmit={ (e) => this.handleUserSignInFormSubmit(e) }>
+                <Form className={ `userSignInForm my-3` } inline onSubmit={ (e) => this.handleUserSignInFormSubmit(e) }>
                     <Form.Group>
                         <Form.Control className={ "userSignInEmail" } onChange={ (e) => this.handleSubmissionEmailChange(e) } placeholder={ "Email" } type={ "email" } value={ this.state.submissionEmail } />
                     </Form.Group>
@@ -73,7 +73,7 @@ class AuthNavbar extends Component {
                 </Form>;
         } else {
             userOptions =
-                <Form className={ "userSignOutForm" } inline onSubmit={ (e) => this.handleUserSignOutFormSubmit(e) }>
+                <Form className={ `userSignOutForm my-3` } inline onSubmit={ (e) => this.handleUserSignOutFormSubmit(e) }>
                     <div>Hi, { this.props.user.firstName }!</div>
                     <Button type={ "submit" } variant={ "primary" }>
                         Sign Out
@@ -86,22 +86,22 @@ class AuthNavbar extends Component {
                 <Navbar.Toggle aria-controls={ "basic-navbar-nav" } />
                 <Navbar.Collapse id={ "basic-navbar-nav" }>
                     <Nav>
-                        <NavDropdown title={ "About Us" }>
+                        <NavDropdown className={ "ml-lg-3" } title={ "About Us" }>
                             <NavDropdown.Item>Mission Statement</NavDropdown.Item>
                             <NavDropdown.Item>Meet The Staff</NavDropdown.Item>
                             <NavDropdown.Item>Media</NavDropdown.Item>
                         </NavDropdown>
-                        <NavDropdown title={ "News" }>
+                        <NavDropdown className={ "ml-lg-3" } title={ "News" }>
                             <NavDropdown.Item>General News</NavDropdown.Item>
                             <NavDropdown.Item>Alerts and Notices</NavDropdown.Item>
                         </NavDropdown>
-                        <NavDropdown title={ "Donate" }>
+                        <NavDropdown className={ "ml-lg-3" } title={ "Donate" }>
                             <NavDropdown.Item>Money</NavDropdown.Item>
                             <NavDropdown.Item>Food Donation Guidelines</NavDropdown.Item>
                             <NavDropdown.Item>Volunteer</NavDropdown.Item>
                             <NavDropdown.Item>Other</NavDropdown.Item>
                         </NavDropdown>
-                        <NavDropdown title={ "Contact Us" }>
+                        <NavDropdown className={ "ml-lg-3" } title={ "Contact Us" }>
                             <NavDropdown.Item>Message Us</NavDropdown.Item>
                             <NavDropdown.Item>Follow Us</NavDropdown.Item>
                             <NavDropdown.Item>Other Contact Info</NavDropdown.Item>
