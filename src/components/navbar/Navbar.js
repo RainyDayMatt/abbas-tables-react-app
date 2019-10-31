@@ -30,7 +30,7 @@ class AuthNavbar extends Component {
     handleUserSignInFormSubmit(e) {
         e.preventDefault();
         if (this.state.submissionEmail.length > 0 && this.state.submissionPassword.length > 0) {
-            this.props.authentication.fetchUser({
+            this.props.fetchUser({
                 email: this.state.submissionEmail,
                 password: this.state.submissionPassword
             });
@@ -50,21 +50,21 @@ class AuthNavbar extends Component {
 
     handleUserSignOutFormSubmit(e) {
         e.preventDefault();
-        this.props.authentication.submitUserSignOutForm();
+        this.props.submitUserSignOutForm();
     }
 
     render() {
         let userOptions;
-        if (!this.props.authentication.user) {
+        if (!this.props.user) {
             userOptions =
                 <Form className={ "userSignInForm" } inline onSubmit={ (e) => this.handleUserSignInFormSubmit(e) }>
                     <Form.Group>
-                        <Form.Control className={ `mr-2 userSignInEmail` } onChange={ (e) => this.handleSubmissionEmailChange(e) } placeholder={ "Email" } type={ "email" } value={ this.state.submissionEmail } />
+                        <Form.Control className={ "userSignInEmail" } onChange={ (e) => this.handleSubmissionEmailChange(e) } placeholder={ "Email" } type={ "email" } value={ this.state.submissionEmail } />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Control className={ `mr-2 userSignInPassword` } onChange={ (e) => this.handleSubmissionPasswordChange(e) } placeholder={ "Password" } type={ "password" } value={ this.state.submissionPassword } />
+                        <Form.Control className={ "userSignInPassword" } onChange={ (e) => this.handleSubmissionPasswordChange(e) } placeholder={ "Password" } type={ "password" } value={ this.state.submissionPassword } />
                     </Form.Group>
-                    <Button className={ "mr-2" } type={ "submit" } variant={ "primary" }>
+                    <Button type={ "submit" } variant={ "primary" }>
                         Sign In
                     </Button>
                     <Link to={ "/signUp" }>
@@ -74,7 +74,7 @@ class AuthNavbar extends Component {
         } else {
             userOptions =
                 <Form className={ "userSignOutForm" } inline onSubmit={ (e) => this.handleUserSignOutFormSubmit(e) }>
-                    <div className={ "mr-2" }>Hi, { this.props.authentication.user.firstName }!</div>
+                    <div>Hi, { this.props.user.firstName }!</div>
                     <Button type={ "submit" } variant={ "primary" }>
                         Sign Out
                     </Button>

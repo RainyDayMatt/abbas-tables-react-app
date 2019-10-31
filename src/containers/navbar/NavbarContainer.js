@@ -3,6 +3,10 @@ import { connect } from "react-redux";
 import { fetchUser, submitUserSignOutForm } from "../../actions/navbar/NavbarActions";
 import Navbar from "../../components/navbar/Navbar";
 
+const mapStateToProps = (state) => {
+    return state.authentication;
+};
+
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchUser: (userSignInForm) => {
@@ -15,5 +19,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect(
+    mapStateToProps,
     mapDispatchToProps
 )(Navbar);
