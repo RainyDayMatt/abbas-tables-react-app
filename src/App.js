@@ -18,7 +18,7 @@ class App extends Component {
         return (
             <Provider store={ store }>
                 <BrowserRouter>
-                    <div className={ "p-3" }>
+                    <div className={ `container p-3` }>
                         <NavbarContainer />
                         <main>
                             <Route path={ "/signUp" } component={ SignUpContainer } />
