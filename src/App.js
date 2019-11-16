@@ -20,7 +20,7 @@ class App extends Component {
                 <BrowserRouter>
                     <div className={ `container p-3` }>
                         <NavbarContainer />
-                        <main>
+                        <main className={ "p-3" }>
                             <Route path={ "/signUp" } component={ SignUpContainer } />
                         </main>
                     </div>

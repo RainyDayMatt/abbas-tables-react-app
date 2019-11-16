@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import { Navbar, NavbarToggler, Collapse, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Form, FormGroup, Input, Button } from "reactstrap";
+import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Form, FormGroup, Input, Button } from "reactstrap";
 
 class AuthNavbar extends Component {
     constructor(props) {
@@ -79,7 +79,7 @@ class AuthNavbar extends Component {
         }
         return (
             <Navbar light expand={ "lg" }>
-                <Link className={ "navbar-brand" } to={ "/" }>Abba's Tables</Link>
+                <NavbarBrand>Abba's Tables</NavbarBrand>
                 <NavbarToggler onClick={ () => this.setState({ isOpen: !this.state.isOpen }) } />
                 <Collapse navbar isOpen={ this.state.isOpen }>
                     <Nav navbar>
