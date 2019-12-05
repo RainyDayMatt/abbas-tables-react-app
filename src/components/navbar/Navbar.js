@@ -1,16 +1,28 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Nav from "react-bootstrap/Nav";
+import {
+    Button,
+    Collapse,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+    Form,
+    FormGroup,
+    Input,
+    Nav,
+    Navbar,
+    NavbarBrand,
+    NavbarToggler,
+    UncontrolledDropdown
+} from "reactstrap";
 
 class AuthNavbar extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            isOpen: false,
             submissionEmail: "",
             submissionEmailError: "",
             submissionPassword: "",
@@ -28,7 +40,7 @@ class AuthNavbar extends Component {
 
     handleUserSignInFormSubmit(e) {
         e.preventDefault();
-        if (this.state.submissionEmail !== "" && this.state.submissionPassword !== "") {
+        if (this.state.submissionEmail.length > 0 && this.state.submissionPassword.length > 0) {
             this.props.fetchUser({
                 email: this.state.submissionEmail,
                 password: this.state.submissionPassword
@@ -41,8 +53,8 @@ class AuthNavbar extends Component {
             });
         } else {
             this.setState({
-                submissionEmailError: this.state.submissionEmail === "" ? "Email cannot be blank." : "",
-                submissionPasswordError: this.state.submissionPassword === "" ? "Password cannot be blank." : ""
+                submissionEmailError: this.state.submissionEmail.length > 0 ? "Email cannot be blank." : "",
+                submissionPasswordError: this.state.submissionPassword.length > 0 ? "Password cannot be blank." : ""
             });
         }
     }
@@ -56,55 +68,102 @@ class AuthNavbar extends Component {
         let userOptions;
         if (!this.props.user) {
             userOptions =
-                <Form inline onSubmit={ (e) => this.handleUserSignInFormSubmit(e) } >
-                    <Form.Group className={ "mr-sm-2" } controlId={ "email" } >
-                        <Form.Control onChange={ (e) => this.handleSubmissionEmailChange(e) } placeholder={ "Email" } type={ "email" } value={ this.state.submissionEmail } />
-                    </Form.Group>
-                    <Form.Group className={ "mr-sm-2" } controlId={ "password" } >
-                        <Form.Control onChange={ (e) => this.handleSubmissionPasswordChange(e) } placeholder={ "Password" } type={ "password" } value={ this.state.submissionPassword } />
-                    </Form.Group>
-                    <Button type={ "submit" } variant={ "primary" } >
+                <Form className={ "userSignInForm" } inline onSubmit={ (e) => this.handleUserSignInFormSubmit(e) }>
+                    <FormGroup>
+                        <Input className={ `mr-lg-2 userSignInEmail` } onChange={ (e) => this.handleSubmissionEmailChange(e) } type={ "email" } name={ "email" } placeholder={ "Email" } value={ this.state.submissionEmail } />
+                    </FormGroup>
+                    <FormGroup>
+                        <Input className={ `mr-lg-2 userSignInPassword` } onChange={ (e) => this.handleSubmissionPasswordChange(e) } type={ "password" } name={ "password" } placeholder={ "Password" } value={ this.state.submissionPassword } />
+                    </FormGroup>
+                    <Button className={ "mr-lg-2" } color={ "primary" }>
                         Sign In
                     </Button>
+                    <Link to={ "/signUp" }>
+                        Sign Up
+                    </Link>
                 </Form>;
         } else {
             userOptions =
-                <Form inline onSubmit={ (e) => this.handleUserSignOutFormSubmit(e) } >
-                    <div className={ "mr-3" }>Hi, { this.props.user.firstName }!</div>
-                    <Button type={ "submit" } variant={ "primary" } >
+                <Form className={ "userSignOutForm" } inline onSubmit={ (e) => this.handleUserSignOutFormSubmit(e) }>
+                    <div className={ "mr-lg-2" }>Hi, { this.props.user.firstName }!</div>
+                    <Button color={ "primary" }>
                         Sign Out
                     </Button>
                 </Form>;
         }
         return (
-            <Navbar className={ "p-3" } expand={ "lg" } style={{ flex: 1, flexDirection: "row", justifyContent: "space-between" }} >
-                <Navbar.Brand>Abba's Tables</Navbar.Brand>
-                <Navbar.Toggle aria-controls={ "basic-navbar-nav" } />
-                <Navbar.Collapse id={ "basic-navbar-nav" }>
-                    <Nav>
-                        <NavDropdown className={ "ml-3" } title={ "About Us" }>
-                            <NavDropdown.Item>Mission Statement</NavDropdown.Item>
-                            <NavDropdown.Item>Meet The Staff</NavDropdown.Item>
-                            <NavDropdown.Item>Media</NavDropdown.Item>
-                        </NavDropdown>
-                        <NavDropdown className={ "ml-3" } title={ "News" }>
-                            <NavDropdown.Item>General News</NavDropdown.Item>
-                            <NavDropdown.Item>Alerts and Notices</NavDropdown.Item>
-                        </NavDropdown>
-                        <NavDropdown className={ "ml-3" } title={ "Donate" }>
-                            <NavDropdown.Item>Money</NavDropdown.Item>
-                            <NavDropdown.Item>Food Donation Guidelines</NavDropdown.Item>
-                            <NavDropdown.Item>Volunteer</NavDropdown.Item>
-                            <NavDropdown.Item>Other</NavDropdown.Item>
-                        </NavDropdown>
-                        <NavDropdown className={ "ml-3" } title={ "Contact Us" }>
-                            <NavDropdown.Item>Message Us</NavDropdown.Item>
-                            <NavDropdown.Item>Follow Us</NavDropdown.Item>
-                            <NavDropdown.Item>Other Contact Info</NavDropdown.Item>
-                        </NavDropdown>
+            <Navbar light expand={ "lg" }>
+                <NavbarBrand>Abba's Tables</NavbarBrand>
+                <NavbarToggler onClick={ () => this.setState({ isOpen: !this.state.isOpen }) } />
+                <Collapse navbar isOpen={ this.state.isOpen }>
+                    <Nav navbar>
+                        <UncontrolledDropdown className={ "mr-lg-2" } nav inNavbar>
+                            <DropdownToggle nav>
+                                About Us
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem>
+                                    <Link to={ "/" }>Mission Statement</Link>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <Link to={ "/" }>Meet the Staff</Link>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <Link to={ "/" }>Media</Link>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                        <UncontrolledDropdown className={ "mr-lg-2" } nav inNavbar>
+                            <DropdownToggle nav>
+                                News
+                               </DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem>
+                                    <Link to={ "/" }>General News</Link>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <Link to={ "/" }>Alerts and Notices</Link>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                        <UncontrolledDropdown className={ "mr-lg-2" } nav inNavbar>
+                            <DropdownToggle nav>
+                                Donate
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem>
+                                    <Link to={ "/" }>Money</Link>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <Link to={ "/" }>Food Donation Guidelines</Link>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <Link to={ "/" }>Volunteer</Link>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <Link to={ "/" }>Other</Link>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
+                        <UncontrolledDropdown className={ "mr-lg-2" } nav inNavbar>
+                            <DropdownToggle nav>
+                                Contact Us
+                            </DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem>
+                                    <Link to={ "/" }>Message Us</Link>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <Link to={ "/" }>Follow Us</Link>
+                                </DropdownItem>
+                                <DropdownItem>
+                                    <Link to={ "/" }>Other Contact Info</Link>
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </UncontrolledDropdown>
                     </Nav>
-                </Navbar.Collapse>
-                { userOptions }
+                    { userOptions }
+                </Collapse>
             </Navbar>
         );
     }

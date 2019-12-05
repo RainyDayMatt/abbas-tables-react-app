@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+
 import { fetchUser, submitUserSignOutForm } from "../../actions/navbar/NavbarActions";
 import Navbar from "../../components/navbar/Navbar";
 

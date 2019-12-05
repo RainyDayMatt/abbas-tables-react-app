@@ -8,10 +8,6 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe("Navbar actions : ", () => {
-    const userSignInForm = {
-        email: "shepard@n7.gov",
-        password: "M1nerals21"
-    };
 
     describe("Synchronous actions : ", () => {
         it("Should create an action to submit a user sign out form.", () => {
@@ -24,6 +20,10 @@ describe("Navbar actions : ", () => {
 
     describe("Asynchronous actions : ", () => {
         const userSignInURL = "http://localhost:3000/users/sign_in";
+        const userSignInForm = {
+            email: "shepard@n7.gov",
+            password: "M1nerals21"
+        };
         afterEach(() => {
             fetchMock.restore();
         });
@@ -35,7 +35,7 @@ describe("Navbar actions : ", () => {
             };
             fetchMock.postOnce(userSignInURL, {
                 headers: { "content-type": "application/json" },
-                body: user
+                user
             });
             const expectedActions = [
                 {

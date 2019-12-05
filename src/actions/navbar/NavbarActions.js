@@ -33,16 +33,16 @@ function fetchUserFailure(err, receivedAt = Date.now()) {
 }
 
 export function fetchUser(userSignInForm, forcedTime = undefined) {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(fetchUserRequest(userSignInForm));
         let apiRoot = "http://localhost:3000";
         if (process.env.REACT_APP_API_ROOT) {
             apiRoot = process.env.REACT_APP_API_ROOT;
         }
-        return fetch(`${apiRoot}/users/sign_in`, {
+        return fetch(`${ apiRoot }/users/sign_in`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "content-type": "application/json"
             },
             body: JSON.stringify(userSignInForm)
         })
@@ -51,7 +51,7 @@ export function fetchUser(userSignInForm, forcedTime = undefined) {
                 if (json.err) {
                     dispatch(fetchUserFailure(json.err, forcedTime))
                 } else {
-                    dispatch(fetchUserSuccess(json, forcedTime))
+                    dispatch(fetchUserSuccess(json.user, forcedTime))
                 }
             });
     }

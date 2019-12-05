@@ -1,6 +1,7 @@
 import React from "react";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
+
 import Navbar from "./Navbar";
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -10,7 +11,7 @@ function signedOutSetup() {
         fetchUser: jest.fn(),
         submitUserSignOutForm: jest.fn()
     };
-    const enzymeWrapper = shallow(<Navbar {...props}/>);
+    const enzymeWrapper = shallow(<Navbar {...props} />);
     const inputs = {
         userSignInEmail: enzymeWrapper.find(".userSignInEmail"),
         userSignInPassword: enzymeWrapper.find(".userSignInPassword"),
@@ -29,7 +30,7 @@ function signedInSetup() {
             password: "M1nerals21"
         }
     };
-    const enzymeWrapper = shallow(<Navbar {...props}/>);
+    const enzymeWrapper = shallow(<Navbar {...props} />);
     return { props, enzymeWrapper };
 }
 
@@ -38,34 +39,36 @@ const formSubmitEvent = {
 };
 
 describe("Navbar component : ", () => {
+
     describe("User sign-in behavior.", () => {
-        it("Should not call fetchUser when sign in form is submitted if email alone is an empty string.", () => {
+        it("Should not call fetchUser when sign-in form is submitted if email alone is an empty string.", () => {
             const { props, enzymeWrapper, inputs } = signedOutSetup();
             inputs.userSignInEmail.simulate("change", { target: { value: "" } });
             inputs.userSignInPassword.simulate("change", { target: { value: "M1nerals21" } });
             inputs.userSignInForm.simulate("submit", formSubmitEvent);
-            expect(props.fetchUser.mock.calls.length).toBe(0);
+            expect(props.fetchUser.mock.calls.length).toEqual(0);
         });
-        it("Should not call fetchUser when sign in form is submitted if password alone is an empty string.", () => {
+        it("Should not call fetchUser when sign-in form is submitted if password alone is an empty string.", () => {
             const { props, enzymeWrapper, inputs } = signedOutSetup();
             inputs.userSignInEmail.simulate("change", { target: { value: "shepard@n7.gov" } });
             inputs.userSignInPassword.simulate("change", { target: { value: "" } });
             inputs.userSignInForm.simulate("submit", formSubmitEvent);
-            expect(props.fetchUser.mock.calls.length).toBe(0);
+            expect(props.fetchUser.mock.calls.length).toEqual(0);
         });
-        it("Should call fetchUser when sign in form is submitted if neither email nor password is an empty string.", () => {
+        it("Should call fetchUser when sign-in form is submitted if neither email nor password is an empty string.", () => {
             const { props, enzymeWrapper, inputs } = signedOutSetup();
             inputs.userSignInEmail.simulate("change", { target: { value: "shepard@n7.gov" } });
             inputs.userSignInPassword.simulate("change", { target: { value: "M1nerals21" } });
             inputs.userSignInForm.simulate("submit", formSubmitEvent);
-            expect(props.fetchUser.mock.calls.length).toBe(1);
+            expect(props.fetchUser.mock.calls.length).toEqual(1);
         });
     });
+
     describe("User sign-out behavior.", () => {
-        it("Should call submitUserSignOutForm when sign out form is submitted.", () => {
+        it("Should call submitUserSignOutForm when sign-out form is submitted.", () => {
             const { props, enzymeWrapper } = signedInSetup();
             enzymeWrapper.find(".userSignOutForm").simulate("submit", formSubmitEvent);
-            expect(props.submitUserSignOutForm.mock.calls.length).toBe(1);
+            expect(props.submitUserSignOutForm.mock.calls.length).toEqual(1);
         });
     });
 });
