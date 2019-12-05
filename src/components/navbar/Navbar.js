@@ -1,7 +1,21 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, Form, FormGroup, Input, Button } from "reactstrap";
+import {
+    Button,
+    Collapse,
+    DropdownItem,
+    DropdownMenu,
+    DropdownToggle,
+    Form,
+    FormGroup,
+    Input,
+    Nav,
+    Navbar,
+    NavbarBrand,
+    NavbarToggler,
+    UncontrolledDropdown
+} from "reactstrap";
 
 class AuthNavbar extends Component {
     constructor(props) {
@@ -102,7 +116,7 @@ class AuthNavbar extends Component {
                         <UncontrolledDropdown className={ "mr-lg-2" } nav inNavbar>
                             <DropdownToggle nav>
                                 News
-                            </DropdownToggle>
+                               </DropdownToggle>
                             <DropdownMenu>
                                 <DropdownItem>
                                     <Link to={ "/" }>General News</Link>

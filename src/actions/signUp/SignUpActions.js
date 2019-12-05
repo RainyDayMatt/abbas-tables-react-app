@@ -32,7 +32,7 @@ export function createUser(userCreationForm, forcedTime = undefined) {
         if (process.env.REACT_APP_API_ROOT) {
             apiRoot = process.env.REACT_APP_API_ROOT;
         }
-        return fetch(`${apiRoot}/users`, {
+        return fetch(`${ apiRoot }/users`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -41,10 +41,12 @@ export function createUser(userCreationForm, forcedTime = undefined) {
         })
             .then(response => response.json())
             .then(json => {
-                if (json.err) {
-                    dispatch(createUserFailure(json.err, forcedTime))
+                if (json.errors) {
+                    dispatch(createUserFailure(json.errors[0], forcedTime));
+                } else if (json.user) {
+                    dispatch(createUserSuccess(json.user, forcedTime));
                 } else {
-                    dispatch(createUserSuccess(json.newUser, forcedTime))
+                    dispatch(createUserFailure("Unknown API response.", forcedTime));
                 }
             });
     }

@@ -22,7 +22,7 @@ describe("Signup actions : ", () => {
             fetchMock.restore();
         });
         it("Should create a CREATE_USER_SUCCESS action when user creation completes successfully.", () => {
-            const newUser = {
+            const user = {
                 id: 1,
                 email: "shepard@n7.gov",
                 password: "M1nerals21",
@@ -31,7 +31,7 @@ describe("Signup actions : ", () => {
             };
             fetchMock.postOnce(userCreationURL, {
                 headers: { "content-type": "application/json" },
-                newUser
+                user
             });
             const expectedActions = [
                 {
@@ -40,7 +40,7 @@ describe("Signup actions : ", () => {
                 },
                 {
                     type: signUpActions.CREATE_USER_SUCCESS,
-                    newUser,
+                    newUser: user,
                     receivedAt: 1
                 }
             ];
@@ -51,10 +51,10 @@ describe("Signup actions : ", () => {
                 });
         });
         it("Should create a CREATE_USER_FAILURE action when user creation completes unsuccessfully.", () => {
-            const err = "Duplicate email.";
+            const errors = [ "Duplicate email." ];
             fetchMock.postOnce(userCreationURL, {
                 headers: { "content-type": "application/json" },
-                err
+                errors
             });
             const expectedActions = [
                 {
@@ -63,7 +63,7 @@ describe("Signup actions : ", () => {
                 },
                 {
                     type: signUpActions.CREATE_USER_FAILURE,
-                    err,
+                    err: errors[0],
                     receivedAt: 1
                 }
             ];

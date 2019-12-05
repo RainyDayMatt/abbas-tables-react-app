@@ -39,7 +39,7 @@ export function fetchUser(userSignInForm, forcedTime = undefined) {
         if (process.env.REACT_APP_API_ROOT) {
             apiRoot = process.env.REACT_APP_API_ROOT;
         }
-        return fetch(`${apiRoot}/users/sign_in`, {
+        return fetch(`${ apiRoot }/users/sign_in`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"
