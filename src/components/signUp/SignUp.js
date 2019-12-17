@@ -95,7 +95,7 @@ class SignUp extends Component {
     }
 
     render() {
-        let message = process.env.REACT_APP_API_ROOT ? process.env.REACT_APP_API_ROOT : "None";
+        let message = "Fill out the form to sign up!";
         if (this.props.err) {
             message = `Error creating user: ${ (this.props.err) }`;
         } else if (this.props.newUser) {
