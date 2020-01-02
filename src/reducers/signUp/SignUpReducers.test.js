@@ -9,7 +9,8 @@ describe("Signup reducers : ", () => {
             password: "M1nerals21",
             confirmationPassword: "M1nerals21",
             firstName: "John",
-            lastName: "Shepard"
+            lastName: "Shepard",
+            mobilePhone: "5804361776"
         };
         const newUser = {
             id: 1,

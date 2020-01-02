@@ -26,7 +26,6 @@ class SignUp extends Component {
             submissionHomePhone: "",
             submissionWorkPhone: "",
             submissionOtherPhone: "",
-            submissionPreferredContactMethod: "",
             submissionEmailError: "Required",
             submissionPasswordError: "Required",
             submissionConfirmationPasswordError: "Required",
@@ -36,6 +35,7 @@ class SignUp extends Component {
             submissionHomePhoneError: "Optional",
             submissionWorkPhoneError: "Optional",
             submissionOtherPhoneError: "Optional",
+            submissionPreferredContactMethod: "Email",
             submissionPreferredContactMethodOptions: [ "Email" ]
         };
         this.state = this.initialState;
@@ -122,7 +122,7 @@ class SignUp extends Component {
 
     handleUserCreationFormSubmit(e) {
         e.preventDefault();
-        if (this.errors.every((item) => item === "OK" || "Optional")) {
+        if (this.isFormReadyToSubmit()) {
             this.props.createUser({
                 email: this.state.submissionEmail,
                 password: this.state.submissionPassword,
@@ -132,7 +132,8 @@ class SignUp extends Component {
                 mobilePhone: this.state.submissionMobilePhone,
                 homePhone: this.state.submissionHomePhone,
                 workPhone: this.state.submissionWorkPhone,
-                otherPhone: this.state.submissionOtherPhone
+                otherPhone: this.state.submissionOtherPhone,
+                preferredContactMethod: this.state.submissionPreferredContactMethod
             });
             this.setState(this.initialState);
         } else {
@@ -145,6 +146,18 @@ class SignUp extends Component {
                 submissionMobilePhoneError: this.state.submissionMobilePhone.length <= 0 ? "Mobile phone cannot be blank." : this.state.submissionMobilePhoneError
             });
         }
+    }
+
+    isFormReadyToSubmit() {
+        return this.state.submissionEmailError === "OK" &&
+            this.state.submissionPasswordError === "OK" &&
+            this.state.submissionConfirmationPasswordError === "OK" &&
+            this.state.submissionFirstNameError === "OK" &&
+            this.state.submissionLastNameError === "OK" &&
+            this.state.submissionMobilePhoneError === "OK" &&
+            (this.state.submissionHomePhoneError === "OK" || this.state.submissionHomePhoneError === "Optional") &&
+            (this.state.submissionWorkPhoneError === "OK" || this.state.submissionWorkPhoneError === "Optional") &&
+            (this.state.submissionOtherPhoneError === "OK" || this.state.submissionOtherPhoneError === "Optional");
     }
 
     render() {
@@ -237,7 +250,7 @@ class SignUp extends Component {
                 <Row form>
                     <FormGroup>
                         <Label for={ "newUserPreferredContactMethod" }>Preferred Contact Method</Label>
-                        <Input className={ "newUserPreferredContactMethod" } type={ "select" } name={ "newUserPreferredContactMethod" } id={ "newUserPreferredContactMethod" }>
+                        <Input value={ this.state.submissionPreferredContactMethod } onChange={ (e) => this.setState({ submissionPreferredContactMethod: e.target.value }) } className={ "newUserPreferredContactMethod" } type={ "select" } name={ "newUserPreferredContactMethod" } id={ "newUserPreferredContactMethod" }>
                             { preferredContactMethodOptions }
                         </Input>
                     </FormGroup>
