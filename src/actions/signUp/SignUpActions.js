@@ -41,8 +41,8 @@ export function createUser(userCreationForm, forcedTime = undefined) {
         })
             .then(response => response.json())
             .then(json => {
-                if (json.errors) {
-                    dispatch(createUserFailure(json.errors[0], forcedTime));
+                if (json.err) {
+                    dispatch(createUserFailure(json.err[0], forcedTime));
                 } else if (json.user) {
                     dispatch(createUserSuccess(json.user, forcedTime));
                 } else {
