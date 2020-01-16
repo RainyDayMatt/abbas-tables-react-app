@@ -31,5 +31,31 @@ module.exports = {
         } else {
             return "OK";
         }
+    },
+    checkPhoneNumberValidity(number, isOptional) {
+        if (!/^\d*$/.test(number)) {
+            return "Phone number must consist only of numbers.";
+        } else if (number.length !== 10) {
+            if (number.length === 0 && isOptional) {
+                return "Optional";
+            } else {
+                return "Phone number must be ten digits long.";
+            }
+        } else {
+            return "OK";
+        }
+    },
+    composeAvailablePreferredContactOptions(number, method, state) {
+        let newState = state;
+        if (this.checkPhoneNumberValidity(number) === "OK") {
+            if (!state.includes(method)) {
+                newState.push(method);
+            }
+        } else {
+            if (state.includes(method)) {
+                newState = newState.filter((item) => item !== method);
+            }
+        }
+        return newState;
     }
 };

@@ -22,13 +22,34 @@ class SignUp extends Component {
             submissionConfirmationPassword: "",
             submissionFirstName: "",
             submissionLastName: "",
-            submissionEmailError: "Enter an email address in standard format.",
-            submissionPasswordError: "Enter an alphanumeric password between six and 20 characters.",
-            submissionConfirmationPasswordError: "Enter the password again.",
-            submissionFirstNameError: "Enter an alphabetic first name between two and 20 characters.",
-            submissionLastNameError: "Enter an alphabetic last name between two and 20 characters."
+            submissionMobilePhone: "",
+            submissionHomePhone: "",
+            submissionWorkPhone: "",
+            submissionOtherPhone: "",
+            submissionEmailError: "Required",
+            submissionPasswordError: "Required",
+            submissionConfirmationPasswordError: "Required",
+            submissionFirstNameError: "Required",
+            submissionLastNameError: "Required",
+            submissionMobilePhoneError: "Required",
+            submissionHomePhoneError: "Optional",
+            submissionWorkPhoneError: "Optional",
+            submissionOtherPhoneError: "Optional",
+            submissionPreferredContactMethod: "Email",
+            submissionPreferredContactMethodOptions: [ "Email" ]
         };
         this.state = this.initialState;
+        this.errors = [
+            this.state.submissionEmailError,
+            this.state.submissionPasswordError,
+            this.state.submissionConfirmationPasswordError,
+            this.state.submissionFirstNameError,
+            this.state.submissionLastNameError,
+            this.state.submissionMobilePhoneError,
+            this.state.submissionHomePhoneError,
+            this.state.submissionWorkPhoneError,
+            this.state.submissionOtherPhoneError
+        ];
     }
     
     handleSubmissionEmailChange(e) {
@@ -66,21 +87,53 @@ class SignUp extends Component {
         });
     }
 
+    handleSubmissionMobilePhoneChange(e) {
+        this.setState({
+            submissionMobilePhone: e.target.value,
+            submissionMobilePhoneError: Helpers.checkPhoneNumberValidity(e.target.value, false),
+            submissionPreferredContactMethodOptions: Helpers.composeAvailablePreferredContactOptions(e.target.value, "Mobile", this.state.submissionPreferredContactMethodOptions)
+        });
+    }
+
+    handleSubmissionHomePhoneChange(e) {
+        this.setState({
+            submissionHomePhone: e.target.value,
+            submissionHomePhoneError: Helpers.checkPhoneNumberValidity(e.target.value, true),
+            submissionPreferredContactMethodOptions: Helpers.composeAvailablePreferredContactOptions(e.target.value, "Home", this.state.submissionPreferredContactMethodOptions)
+        });
+
+    }
+
+    handleSubmissionWorkPhoneChange(e) {
+        this.setState({
+            submissionWorkPhone: e.target.value,
+            submissionWorkPhoneError: Helpers.checkPhoneNumberValidity(e.target.value, true),
+            submissionPreferredContactMethodOptions: Helpers.composeAvailablePreferredContactOptions(e.target.value, "Work", this.state.submissionPreferredContactMethodOptions)
+        });
+    }
+
+    handleSubmissionOtherPhoneChange(e) {
+        this.setState({
+            submissionOtherPhone: e.target.value,
+            submissionOtherPhoneError: Helpers.checkPhoneNumberValidity(e.target.value, true),
+            submissionPreferredContactMethodOptions: Helpers.composeAvailablePreferredContactOptions(e.target.value, "Other", this.state.submissionPreferredContactMethodOptions)
+        });
+    }
+
     handleUserCreationFormSubmit(e) {
         e.preventDefault();
-        if (
-            this.state.submissionEmailError === "OK" &&
-            this.state.submissionPasswordError === "OK" &&
-            this.state.submissionConfirmationPasswordError === "OK" &&
-            this.state.submissionFirstNameError === "OK" &&
-            this.state.submissionLastNameError === "OK"
-        ) {
+        if (this.isFormReadyToSubmit()) {
             this.props.createUser({
                 email: this.state.submissionEmail,
                 password: this.state.submissionPassword,
                 confirmationPassword: this.state.submissionConfirmationPassword,
                 firstName: this.state.submissionFirstName,
-                lastName: this.state.submissionLastName
+                lastName: this.state.submissionLastName,
+                mobilePhone: this.state.submissionMobilePhone,
+                homePhone: this.state.submissionHomePhone,
+                workPhone: this.state.submissionWorkPhone,
+                otherPhone: this.state.submissionOtherPhone,
+                preferredContactMethod: this.state.submissionPreferredContactMethod
             });
             this.setState(this.initialState);
         } else {
@@ -89,9 +142,22 @@ class SignUp extends Component {
                 submissionPasswordError: this.state.submissionPassword.length <= 0 ? "Password cannot be blank." : this.state.submissionPasswordError,
                 submissionConfirmationPasswordError: this.state.submissionConfirmationPassword.length <= 0 ? "Confirmation password cannot be blank." : this.state.submissionConfirmationPasswordError,
                 submissionFirstNameError: this.state.submissionFirstName.length <= 0 ? "First name cannot be blank." : this.state.submissionFirstNameError,
-                submissionLastNameError: this.state.submissionLastName.length <= 0 ? "Last name cannot be blank." : this.state.submissionLastNameError
+                submissionLastNameError: this.state.submissionLastName.length <= 0 ? "Last name cannot be blank." : this.state.submissionLastNameError,
+                submissionMobilePhoneError: this.state.submissionMobilePhone.length <= 0 ? "Mobile phone cannot be blank." : this.state.submissionMobilePhoneError
             });
         }
+    }
+
+    isFormReadyToSubmit() {
+        return this.state.submissionEmailError === "OK" &&
+            this.state.submissionPasswordError === "OK" &&
+            this.state.submissionConfirmationPasswordError === "OK" &&
+            this.state.submissionFirstNameError === "OK" &&
+            this.state.submissionLastNameError === "OK" &&
+            this.state.submissionMobilePhoneError === "OK" &&
+            (this.state.submissionHomePhoneError === "OK" || this.state.submissionHomePhoneError === "Optional") &&
+            (this.state.submissionWorkPhoneError === "OK" || this.state.submissionWorkPhoneError === "Optional") &&
+            (this.state.submissionOtherPhoneError === "OK" || this.state.submissionOtherPhoneError === "Optional");
     }
 
     render() {
@@ -101,6 +167,9 @@ class SignUp extends Component {
         } else if (this.props.newUser) {
             message = `Hello, ${ this.props.newUser.firstName }! User creation successful.`;
         }
+        let preferredContactMethodOptions = this.state.submissionPreferredContactMethodOptions.map(method =>
+            <option key={ method }>{ method }</option>
+        );
         return (
             <Form className={ "userCreationForm" } onSubmit={ (e) => this.handleUserCreationFormSubmit(e) }>
                 <h1>New User Sign-Up</h1>
@@ -145,6 +214,46 @@ class SignUp extends Component {
                             <FormText className={ "newUserLastNameText" } >{ this.state.submissionLastNameError }</FormText>
                         </FormGroup>
                     </Col>
+                </Row>
+                <Row form>
+                    <Col md={6}>
+                        <FormGroup>
+                            <Label for={ "newUserMobilePhone" }>Mobile Phone</Label>
+                            <Input value={ this.state.submissionMobilePhone } onChange={ (e) => this.handleSubmissionMobilePhoneChange(e) } valid={ this.state.submissionMobilePhoneError === "OK" } name={ "newUserMobilePhone" } id={ "newUserMobilePhone" } placeholder={ "Please enter your mobile phone number" } className={ "newUserMobilePhone" } />
+                            <FormText className={ "newUserMobilePhoneText" } >{ this.state.submissionMobilePhoneError }</FormText>
+                        </FormGroup>
+                    </Col>
+                    <Col md={6}>
+                        <FormGroup>
+                            <Label for={ "newUserHomePhone" }>Home Phone</Label>
+                            <Input value={ this.state.submissionHomePhone } onChange={ (e) => this.handleSubmissionHomePhoneChange(e) } valid={ this.state.submissionHomePhoneError === "OK" } name={ "newUserHomePhone" } id={ "newUserHomePhone" } placeholder={ "Please enter your home phone number" } className={ "newUserHomePhone" } />
+                            <FormText className={ "newUserHomePhoneText" } >{ this.state.submissionHomePhoneError }</FormText>
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row form>
+                    <Col md={6}>
+                        <FormGroup>
+                            <Label for={ "newUserWorkPhone" }>Work Phone</Label>
+                            <Input value={ this.state.submissionWorkPhone } onChange={ (e) => this.handleSubmissionWorkPhoneChange(e) } valid={ this.state.submissionWorkPhoneError === "OK" } name={ "newUserWorkPhone" } id={ "newUserWorkPhone" } placeholder={ "Please enter your work phone number" } className={ "newUserWorkPhone" } />
+                            <FormText className={ "newUserWorkPhoneText" } >{ this.state.submissionWorkPhoneError }</FormText>
+                        </FormGroup>
+                    </Col>
+                    <Col md={6}>
+                        <FormGroup>
+                            <Label for={ "newUserOtherPhone" }>Other Phone</Label>
+                            <Input value={ this.state.submissionOtherPhone } onChange={ (e) => this.handleSubmissionOtherPhoneChange(e) } valid={ this.state.submissionOtherPhoneError === "OK" } name={ "newUserOtherPhone" } id={ "newUserOtherPhone" } placeholder={ "Please enter a miscellaneous phone number" } className={ "newUserOtherPhone" } />
+                            <FormText className={ "newUserOtherPhoneText" } >{ this.state.submissionOtherPhoneError }</FormText>
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row form>
+                    <FormGroup>
+                        <Label for={ "newUserPreferredContactMethod" }>Preferred Contact Method</Label>
+                        <Input value={ this.state.submissionPreferredContactMethod } onChange={ (e) => this.setState({ submissionPreferredContactMethod: e.target.value }) } className={ "newUserPreferredContactMethod" } type={ "select" } name={ "newUserPreferredContactMethod" } id={ "newUserPreferredContactMethod" }>
+                            { preferredContactMethodOptions }
+                        </Input>
+                    </FormGroup>
                 </Row>
                 <Button color={ "primary" }>
                     Submit

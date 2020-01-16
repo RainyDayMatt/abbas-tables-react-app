@@ -16,7 +16,8 @@ describe("Signup actions : ", () => {
             password: "M1nerals21",
             confirmationPassword: "M1nerals21",
             firstName: "John",
-            lastName: "Shepard"
+            lastName: "Shepard",
+            mobilePhone: "5804361776"
         };
         afterEach(() => {
             fetchMock.restore();
@@ -27,7 +28,8 @@ describe("Signup actions : ", () => {
                 email: "shepard@n7.gov",
                 password: "M1nerals21",
                 firstName: "John",
-                lastName: "Shepard"
+                lastName: "Shepard",
+                mobilePhone: "5804361776"
             };
             fetchMock.postOnce(userCreationURL, {
                 headers: { "content-type": "application/json" },
