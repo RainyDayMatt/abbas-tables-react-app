@@ -162,10 +162,17 @@ class SignUp extends Component {
 
     render() {
         let message = "Fill out the form to sign up!";
+        let loading = "Test";
         if (this.props.err) {
             message = `Error creating user: ${ (this.props.err) }`;
         } else if (this.props.newUser) {
             message = `Hello, ${ this.props.newUser.firstName }! User creation successful.`;
+        }
+        if (this.props.isCreating) {
+            loading = "Loading"
+        }
+        else {
+            loading = "Done"
         }
         let preferredContactMethodOptions = this.state.submissionPreferredContactMethodOptions.map(method =>
             <option key={ method }>{ method }</option>
@@ -174,6 +181,7 @@ class SignUp extends Component {
             <Form className={ "userCreationForm" } onSubmit={ (e) => this.handleUserCreationFormSubmit(e) }>
                 <h1>New User Sign-Up</h1>
                 <h3 className={ "message" }>{ message }</h3>
+                <h3>{ process.env.REACT_APP_API_ROOT }</h3>
                 <Row form>
                     <Col md={9}>
                         <FormGroup>
