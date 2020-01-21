@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
@@ -11,7 +12,7 @@ import SignUpContainer from "./containers/signUp/SignUpContainer";
 
 import "./App.css";
 
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunkMiddleware)));
 
 class App extends Component {
     render() {
