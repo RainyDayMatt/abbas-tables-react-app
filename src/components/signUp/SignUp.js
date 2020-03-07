@@ -248,12 +248,14 @@ class SignUp extends Component {
                     </Col>
                 </Row>
                 <Row form>
-                    <FormGroup>
-                        <Label for={ "newUserPreferredContactMethod" }>Preferred Contact Method</Label>
-                        <Input value={ this.state.submissionPreferredContactMethod } onChange={ (e) => this.setState({ submissionPreferredContactMethod: e.target.value }) } className={ "newUserPreferredContactMethod" } type={ "select" } name={ "newUserPreferredContactMethod" } id={ "newUserPreferredContactMethod" }>
-                            { preferredContactMethodOptions }
-                        </Input>
-                    </FormGroup>
+                    <Col md={3}>
+                        <FormGroup>
+                            <Label for={ "newUserPreferredContactMethod" }>Preferred Contact Method</Label>
+                            <Input value={ this.state.submissionPreferredContactMethod } onChange={ (e) => this.setState({ submissionPreferredContactMethod: e.target.value }) } className={ "newUserPreferredContactMethod" } type={ "select" } name={ "newUserPreferredContactMethod" } id={ "newUserPreferredContactMethod" }>
+                                { preferredContactMethodOptions }
+                            </Input>
+                        </FormGroup>
+                    </Col>
                 </Row>
                 <Button color={ "primary" }>
                     Submit
