@@ -96,7 +96,7 @@ class AuthNavbar extends Component {
                 <NavbarBrand>Abba's Tables</NavbarBrand>
                 <NavbarToggler onClick={ () => this.setState({ isOpen: !this.state.isOpen }) } />
                 <Collapse navbar isOpen={ this.state.isOpen }>
-                    <Nav navbar>
+                    <Nav navbar className={ "mr-auto" }>
                         <UncontrolledDropdown className={ "mr-lg-2" } nav inNavbar>
                             <DropdownToggle nav>
                                 About Us
