@@ -53,10 +53,10 @@ describe("Signup actions : ", () => {
                 });
         });
         it("Should create a CREATE_USER_FAILURE action when user creation completes unsuccessfully.", () => {
-            const errors = [ "Duplicate email." ];
+            const err = [ "Duplicate email." ];
             fetchMock.postOnce(userCreationURL, {
                 headers: { "content-type": "application/json" },
-                errors
+                err
             });
             const expectedActions = [
                 {
@@ -65,7 +65,7 @@ describe("Signup actions : ", () => {
                 },
                 {
                     type: signUpActions.CREATE_USER_FAILURE,
-                    err: errors[0],
+                    err: err[0],
                     receivedAt: 1
                 }
             ];

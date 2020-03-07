@@ -7,6 +7,7 @@ import thunkMiddleware from "redux-thunk";
 
 import rootReducer from "./reducers/rootReducer";
 import NavbarContainer from "./containers/navbar/NavbarContainer";
+import InfoBarContainer from "./containers/infoBar/InfoBarContainer";
 import SignUpContainer from "./containers/signUp/SignUpContainer";
 
 import "./App.css";
@@ -20,6 +21,7 @@ class App extends Component {
                 <BrowserRouter>
                     <div className={ `container p-3` }>
                         <NavbarContainer />
+                        <InfoBarContainer />
                         <main className={ "p-3" }>
                             <Route path={ "/signUp" } component={ SignUpContainer } />
                         </main>
