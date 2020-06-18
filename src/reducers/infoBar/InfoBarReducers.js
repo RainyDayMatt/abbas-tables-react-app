@@ -12,13 +12,13 @@ import {
     FETCH_YEAR_MEAL_SUMMARY_FAILURE
 } from "../../actions/infoBar/InfoBarActions";
 
-const volunteerLinkInitialState = {
+const linksInitialState = {
     isFetching: false,
     err: null,
     receivedAt: null
 };
 
-export function links (state = volunteerLinkInitialState, action) {
+export function links (state = linksInitialState, action) {
     switch (action.type) {
         case FETCH_PROPERTY_REQUEST:
             return Object.assign({}, state, {
