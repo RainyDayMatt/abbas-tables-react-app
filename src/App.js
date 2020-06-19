@@ -20,10 +20,10 @@ class App extends Component {
         return (
             <Provider store={ store }>
                 <BrowserRouter>
-                    <div className={ `container p-3` }>
+                    <div className={ "container" }>
                         <NavbarContainer />
                         <InfoBarContainer />
-                        <main className={ "p-3" }>
+                        <main className={ "px-3" }>
                             <Route path={ "/signUp" } component={ SignUpContainer } />
                             <Route path={ "/missionStatement" } component={ MissionStatementContainer } />
                         </main>
