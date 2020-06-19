@@ -103,7 +103,7 @@ class AuthNavbar extends Component {
                             </DropdownToggle>
                             <DropdownMenu>
                                 <DropdownItem>
-                                    <Link to={ "/aboutUs" }>Mission Statement</Link>
+                                    <Link to={ "/missionStatement" }>Mission Statement</Link>
                                 </DropdownItem>
                                 <DropdownItem>
                                     <Link to={ "/" }>Meet the Staff</Link>

@@ -9,7 +9,7 @@ import rootReducer from "./reducers/rootReducer";
 import NavbarContainer from "./containers/navbar/NavbarContainer";
 import InfoBarContainer from "./containers/infoBar/InfoBarContainer";
 import SignUpContainer from "./containers/signUp/SignUpContainer";
-import AboutUsContainer from "./containers/aboutUs/AboutUsContainer";
+import MissionStatementContainer from "./containers/missionStatement/MissionStatementContainer";
 
 import "./App.css";
 
@@ -25,7 +25,7 @@ class App extends Component {
                         <InfoBarContainer />
                         <main className={ "p-3" }>
                             <Route path={ "/signUp" } component={ SignUpContainer } />
-                            <Route path={ "/aboutUs" } component={ AboutUsContainer } />
+                            <Route path={ "/missionStatement" } component={ MissionStatementContainer } />
                         </main>
                     </div>
                 </BrowserRouter>

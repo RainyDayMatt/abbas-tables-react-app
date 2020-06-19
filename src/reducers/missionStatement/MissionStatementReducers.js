@@ -4,13 +4,13 @@ import {
     FETCH_PROPERTY_FAILURE
 } from "../../actions/common/PropertyFetchActions";
 
-const aboutUsPropertiesInitialState = {
+const missionStatementPropertiesInitialState = {
     isFetching: false,
     err: null,
     receivedAt: null
 };
 
-export function aboutUsProperties (state = aboutUsPropertiesInitialState, action) {
+export function missionStatementProperties (state = missionStatementPropertiesInitialState, action) {
     switch (action.type) {
         case FETCH_PROPERTY_REQUEST:
             return Object.assign({}, state, {

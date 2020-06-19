@@ -3,10 +3,6 @@ import React, { Component } from "react";
 import { Button } from "reactstrap";
 
 class InfoBar extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         const date = new Date();
         this.props.fetchProperty("volunteerLink");

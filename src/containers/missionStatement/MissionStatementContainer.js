@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
 import { fetchProperty } from "../../actions/common/PropertyFetchActions";
-import AboutUs from "../../components/aboutUs/AboutUs";
+import MissionStatement from "../../components/missionStatement/MissionStatement";
 
 const mapStateToProps = (state) => {
     return state;
@@ -18,4 +18,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AboutUs);
+)(MissionStatement);

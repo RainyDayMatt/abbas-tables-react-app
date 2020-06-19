@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import { authentication } from "./navbar/NavbarReducers";
 import { signUp } from "./signUp/SignUpReducers";
 import { links, monthSummary, yearSummary } from "./infoBar/InfoBarReducers";
-import { aboutUsProperties } from "./aboutUs/AboutUsReducers";
+import { missionStatementProperties } from "./missionStatement/MissionStatementReducers";
 
 export default combineReducers({
     authentication,
@@ -10,5 +10,5 @@ export default combineReducers({
     links,
     monthSummary,
     yearSummary,
-    aboutUsProperties
+    missionStatementProperties
 });
