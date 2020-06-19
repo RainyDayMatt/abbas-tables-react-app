@@ -68,14 +68,14 @@ class AuthNavbar extends Component {
         let userOptions;
         if (!this.props.user) {
             userOptions =
-                <Form className={ "userSignInForm" } inline onSubmit={ (e) => this.handleUserSignInFormSubmit(e) }>
-                    <FormGroup>
-                        <Input className={ `mr-lg-2 userSignInEmail` } onChange={ (e) => this.handleSubmissionEmailChange(e) } type={ "email" } name={ "email" } placeholder={ "Email" } value={ this.state.submissionEmail } />
+                <Form className={ `userSignInForm mt-2 mt-md-0` } inline onSubmit={ (e) => this.handleUserSignInFormSubmit(e) }>
+                    <FormGroup className={ `mr-5 mr-md-2` }>
+                        <Input className={ "userSignInEmail" } onChange={ (e) => this.handleSubmissionEmailChange(e) } type={ "email" } name={ "email" } placeholder={ "Email" } value={ this.state.submissionEmail } />
                     </FormGroup>
-                    <FormGroup>
-                        <Input className={ `mr-lg-2 userSignInPassword` } onChange={ (e) => this.handleSubmissionPasswordChange(e) } type={ "password" } name={ "password" } placeholder={ "Password" } value={ this.state.submissionPassword } />
+                    <FormGroup className={ `mr-5 mr-md-2` }>
+                        <Input className={ "userSignInPassword" } onChange={ (e) => this.handleSubmissionPasswordChange(e) } type={ "password" } name={ "password" } placeholder={ "Password" } value={ this.state.submissionPassword } />
                     </FormGroup>
-                    <Button className={ "mr-lg-2" } color={ "primary" }>
+                    <Button className={ `mr-4 mr-md-2` } color={ "primary" }>
                         Sign In
                     </Button>
                     <Link to={ "/signUp" }>
@@ -84,8 +84,8 @@ class AuthNavbar extends Component {
                 </Form>;
         } else {
             userOptions =
-                <Form className={ "userSignOutForm" } inline onSubmit={ (e) => this.handleUserSignOutFormSubmit(e) }>
-                    <div className={ "mr-lg-2" }>Hi, { this.props.user.firstName }!</div>
+                <Form className={ `userSignOutForm mt-2 mt-md-0` } inline onSubmit={ (e) => this.handleUserSignOutFormSubmit(e) }>
+                    <div className={ `mr-4 mr-md-2` }>Hi, { this.props.user.firstName }!</div>
                     <Button color={ "primary" }>
                         Sign Out
                     </Button>
@@ -96,14 +96,14 @@ class AuthNavbar extends Component {
                 <NavbarBrand>Abba's Tables</NavbarBrand>
                 <NavbarToggler onClick={ () => this.setState({ isOpen: !this.state.isOpen }) } />
                 <Collapse navbar isOpen={ this.state.isOpen }>
-                    <Nav navbar className={ "mr-auto" }>
-                        <UncontrolledDropdown className={ "mr-lg-2" } nav inNavbar>
+                    <Nav className={ "mr-auto" } navbar>
+                        <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav>
                                 About Us
                             </DropdownToggle>
                             <DropdownMenu>
                                 <DropdownItem>
-                                    <Link to={ "/" }>Mission Statement</Link>
+                                    <Link to={ "/missionStatement" }>Mission Statement</Link>
                                 </DropdownItem>
                                 <DropdownItem>
                                     <Link to={ "/" }>Meet the Staff</Link>
@@ -113,7 +113,7 @@ class AuthNavbar extends Component {
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <UncontrolledDropdown className={ "mr-lg-2" } nav inNavbar>
+                        <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav>
                                 News
                                </DropdownToggle>
@@ -126,7 +126,7 @@ class AuthNavbar extends Component {
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <UncontrolledDropdown className={ "mr-lg-2" } nav inNavbar>
+                        <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav>
                                 Donate
                             </DropdownToggle>
@@ -145,7 +145,7 @@ class AuthNavbar extends Component {
                                 </DropdownItem>
                             </DropdownMenu>
                         </UncontrolledDropdown>
-                        <UncontrolledDropdown className={ "mr-lg-2" } nav inNavbar>
+                        <UncontrolledDropdown nav inNavbar>
                             <DropdownToggle nav>
                                 Contact Us
                             </DropdownToggle>

@@ -9,6 +9,7 @@ import rootReducer from "./reducers/rootReducer";
 import NavbarContainer from "./containers/navbar/NavbarContainer";
 import InfoBarContainer from "./containers/infoBar/InfoBarContainer";
 import SignUpContainer from "./containers/signUp/SignUpContainer";
+import MissionStatementContainer from "./containers/missionStatement/MissionStatementContainer";
 
 import "./App.css";
 
@@ -19,11 +20,12 @@ class App extends Component {
         return (
             <Provider store={ store }>
                 <BrowserRouter>
-                    <div className={ `container p-3` }>
+                    <div className={ "container" }>
                         <NavbarContainer />
                         <InfoBarContainer />
-                        <main className={ "p-3" }>
+                        <main className={ "px-3" }>
                             <Route path={ "/signUp" } component={ SignUpContainer } />
+                            <Route path={ "/missionStatement" } component={ MissionStatementContainer } />
                         </main>
                     </div>
                 </BrowserRouter>

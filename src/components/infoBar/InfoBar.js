@@ -3,10 +3,6 @@ import React, { Component } from "react";
 import { Button } from "reactstrap";
 
 class InfoBar extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         const date = new Date();
         this.props.fetchProperty("volunteerLink");
@@ -17,13 +13,13 @@ class InfoBar extends Component {
 
     render() {
         return (
-            <div className={ "d-flex px-3" }>
+            <div className={ `d-flex px-3 mb-1` }>
                 Proudly serving Ada's hungry. Meals served this month: { this.props.monthSummary.totalMeals }. Meals served this year: { this.props.yearSummary.totalMeals }.
                 <div className={ "ml-auto" }>
-                    <Button className={ "ml-2" } color={ "primary" } href={ this.props.links.donateLink }>
+                    <Button className={ `mb-1 mr-md-2 ml-1 ml-md-0` } color={ "primary" } href={ this.props.links.donateLink }>
                         Donate Now
                     </Button>
-                    <Button className={ "ml-2" } color={ "primary" } href={ this.props.links.volunteerLink }>
+                    <Button className={ `mb-1 mr-md-2 ml-1 ml-md-0` } color={ "primary" } href={ this.props.links.volunteerLink }>
                         Sign Up to Volunteer
                     </Button>
                 </div>
