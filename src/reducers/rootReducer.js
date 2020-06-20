@@ -3,6 +3,7 @@ import { authentication } from "./navbar/NavbarReducers";
 import { signUp } from "./signUp/SignUpReducers";
 import { links, monthSummary, yearSummary } from "./infoBar/InfoBarReducers";
 import { missionStatementProperties } from "./missionStatement/MissionStatementReducers";
+import { meetTheStaffProperties } from "./meetTheStaff/MeetTheStaffReducers";
 
 export default combineReducers({
     authentication,
@@ -10,5 +11,6 @@ export default combineReducers({
     links,
     monthSummary,
     yearSummary,
-    missionStatementProperties
+    missionStatementProperties,
+    meetTheStaffProperties
 });

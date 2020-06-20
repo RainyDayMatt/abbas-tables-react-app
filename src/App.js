@@ -10,6 +10,7 @@ import NavbarContainer from "./containers/navbar/NavbarContainer";
 import InfoBarContainer from "./containers/infoBar/InfoBarContainer";
 import SignUpContainer from "./containers/signUp/SignUpContainer";
 import MissionStatementContainer from "./containers/missionStatement/MissionStatementContainer";
+import MeetTheStaffContainer from "./containers/meetTheStaff/MeetTheStaffContainer";
 
 import "./App.css";
 
@@ -26,6 +27,7 @@ class App extends Component {
                         <main className={ "px-3" }>
                             <Route path={ "/signUp" } component={ SignUpContainer } />
                             <Route path={ "/missionStatement" } component={ MissionStatementContainer } />
+                            <Route path={ "/meetTheStaff" } component={ MeetTheStaffContainer } />
                         </main>
                     </div>
                 </BrowserRouter>
